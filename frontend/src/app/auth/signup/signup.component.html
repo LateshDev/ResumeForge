@@ -1,0 +1,40 @@
+<div class="auth-page">
+  <form class="card auth-card" [formGroup]="form" (ngSubmit)="submit()">
+    <h1>Create your account</h1>
+    <p class="subtitle">Build a professional resume in minutes.</p>
+
+    <div class="form-field">
+      <label for="name">Full name</label>
+      <input id="name" type="text" formControlName="name" placeholder="Jane Doe">
+      <div class="error-text" *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+        Please enter your name.
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" placeholder="you@example.com">
+      <div class="error-text" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+        Please enter a valid email address.
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label for="password">Password</label>
+      <input id="password" type="password" formControlName="password" placeholder="At least 6 characters">
+      <div class="error-text" *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+        Password must be at least 6 characters.
+      </div>
+    </div>
+
+    <div class="error-text" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+    <button class="btn btn-primary full-width" type="submit" [disabled]="loading">
+      {{ loading ? 'Creating account…' : 'Sign Up' }}
+    </button>
+
+    <p class="switch-link">
+      Already have an account? <a routerLink="/login">Log in</a>
+    </p>
+  </form>
+</div>
