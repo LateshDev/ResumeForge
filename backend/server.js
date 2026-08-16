@@ -5,6 +5,7 @@ const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const resumeRoutes = require('./routes/resumeRoutes');
 const errorHandler = require('./middleware/errorHandler');
+const runMigrations = require('./config/migrate');
 
 const app = express();
 
@@ -20,4 +21,12 @@ app.use((req, res) => res.status(404).json({ message: 'Route not found.' }));
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`ResumeForge API running on http://localhost:${PORT}`));
+
+runMigrations()
+  .then(() => {
+    app.listen(PORT, () => console.log(ResumeForge API running on http://localhost:${PORT}));
+  })
+  .catch((err) => {
+    console.error('Could not start server because migrations failed:', err);
+    process.exit(1);
+  });
