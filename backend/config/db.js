@@ -9,7 +9,10 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME || 'resumeforge',
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0
+  queueLimit: 0,
+  // Cloud MySQL providers (Aiven, PlanetScale, etc.) require SSL.
+  // Set DB_SSL=true in your environment variables to enable it.
+  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined
 });
 
 module.exports = pool;
