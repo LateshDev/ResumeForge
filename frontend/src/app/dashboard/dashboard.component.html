@@ -1,0 +1,32 @@
+<div class="dashboard">
+  <div class="dashboard-header">
+    <div>
+      <h1>My Resumes</h1>
+      <p class="subtitle">Create, edit and manage your resumes.</p>
+    </div>
+    <button class="btn btn-primary" (click)="createNew()">+ New Resume</button>
+  </div>
+
+  <div class="error-text" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <div *ngIf="loading" class="empty-state">Loading your resumes…</div>
+
+  <div *ngIf="!loading && resumes.length === 0" class="empty-state card">
+    <p>You haven't created any resumes yet.</p>
+    <button class="btn btn-primary" (click)="createNew()">Create your first resume</button>
+  </div>
+
+  <div class="resume-grid" *ngIf="!loading && resumes.length > 0">
+    <div class="card resume-card" *ngFor="let r of resumes">
+      <div class="resume-card-body" (click)="edit(r)">
+        <h3>{{ r.title }}</h3>
+        <span class="template-tag">{{ r.template_id }} template</span>
+        <span class="updated">Updated {{ r.updated_at | date: 'MMM d, y, h:mm a' }}</span>
+      </div>
+      <div class="resume-card-actions">
+        <button class="btn btn-secondary" (click)="edit(r)">Edit</button>
+        <button class="btn btn-danger" (click)="remove(r)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
