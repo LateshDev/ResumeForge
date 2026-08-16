@@ -1,0 +1,137 @@
+<div class="editor-page" *ngIf="!loading">
+  <div class="editor-header">
+    <button class="btn btn-secondary" (click)="backToDashboard()">&larr; Back</button>
+    <h1>Edit Resume</h1>
+    <button class="btn btn-primary" (click)="save()" [disabled]="saving">
+      {{ saving ? 'Saving…' : 'Save Resume' }}
+    </button>
+  </div>
+
+  <div class="error-text" *ngIf="errorMessage">{{ errorMessage }}</div>
+  <div class="success-text" *ngIf="successMessage">{{ successMessage }}</div>
+
+  <div class="editor-layout">
+    <form class="card editor-form" [formGroup]="form">
+      <h2>Basic details</h2>
+      <div class="form-field">
+        <label>Resume title</label>
+        <input type="text" formControlName="title" placeholder="e.g. Software Engineer Resume">
+      </div>
+      <div class="grid-2">
+        <div class="form-field">
+          <label>Full name</label>
+          <input type="text" formControlName="fullName" placeholder="Jane Doe">
+        </div>
+        <div class="form-field">
+          <label>Job title</label>
+          <input type="text" formControlName="jobTitle" placeholder="Frontend Developer">
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" formControlName="email" placeholder="jane@example.com">
+        </div>
+        <div class="form-field">
+          <label>Phone</label>
+          <input type="text" formControlName="phone" placeholder="+1 555 123 4567">
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Professional summary</label>
+        <textarea rows="3" formControlName="summary" placeholder="A short summary about you"></textarea>
+      </div>
+
+      <h2>Experience</h2>
+      <div formArrayName="experience">
+        <div class="repeat-block" *ngFor="let exp of experience.controls; let i = index" [formGroupName]="i">
+          <div class="grid-2">
+            <div class="form-field">
+              <label>Company</label>
+              <input type="text" formControlName="company">
+            </div>
+            <div class="form-field">
+              <label>Role</label>
+              <input type="text" formControlName="role">
+            </div>
+          </div>
+          <div class="form-field">
+            <label>Period</label>
+            <input type="text" formControlName="period" placeholder="Jan 2023 – Present">
+          </div>
+          <div class="form-field">
+            <label>Description</label>
+            <textarea rows="2" formControlName="description"></textarea>
+          </div>
+          <button type="button" class="btn btn-danger small" (click)="removeExperience(i)">Remove</button>
+          <hr>
+        </div>
+      </div>
+      <button type="button" class="btn btn-secondary" (click)="addExperience()">+ Add experience</button>
+
+      <h2>Education</h2>
+      <div formArrayName="education">
+        <div class="repeat-block" *ngFor="let edu of education.controls; let i = index" [formGroupName]="i">
+          <div class="grid-2">
+            <div class="form-field">
+              <label>School</label>
+              <input type="text" formControlName="school">
+            </div>
+            <div class="form-field">
+              <label>Degree</label>
+              <input type="text" formControlName="degree">
+            </div>
+          </div>
+          <div class="form-field">
+            <label>Period</label>
+            <input type="text" formControlName="period" placeholder="2019 – 2023">
+          </div>
+          <button type="button" class="btn btn-danger small" (click)="removeEducation(i)">Remove</button>
+          <hr>
+        </div>
+      </div>
+      <button type="button" class="btn btn-secondary" (click)="addEducation()">+ Add education</button>
+
+      <h2>Skills</h2>
+      <div formArrayName="skills" class="skills-list">
+        <div class="skill-row" *ngFor="let skill of skills.controls; let i = index">
+          <input type="text" [formControlName]="i" placeholder="e.g. Angular">
+          <button type="button" class="btn btn-danger small" (click)="removeSkill(i)">✕</button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-secondary" (click)="addSkill()">+ Add skill</button>
+    </form>
+
+    <div class="preview-pane card" [ngClass]="templateId">
+      <h1 class="preview-name">{{ form.value.fullName || 'Your Name' }}</h1>
+      <p class="preview-title">{{ form.value.jobTitle }}</p>
+      <p class="preview-contact">{{ form.value.email }} · {{ form.value.phone }}</p>
+
+      <p class="preview-summary">{{ form.value.summary }}</p>
+
+      <div *ngIf="experience.length > 0">
+        <h3>Experience</h3>
+        <div *ngFor="let exp of experience.value">
+          <strong>{{ exp.role }}</strong> @ {{ exp.company }} <span class="muted">{{ exp.period }}</span>
+          <p>{{ exp.description }}</p>
+        </div>
+      </div>
+
+      <div *ngIf="education.length > 0">
+        <h3>Education</h3>
+        <div *ngFor="let edu of education.value">
+          <strong>{{ edu.degree }}</strong>, {{ edu.school }} <span class="muted">{{ edu.period }}</span>
+        </div>
+      </div>
+
+      <div *ngIf="skills.length > 0">
+        <h3>Skills</h3>
+        <div class="skill-tags">
+          <span class="skill-tag" *ngFor="let s of skills.value">{{ s }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="loading" class="loading-state">Loading resume…</div>
