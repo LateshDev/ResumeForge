@@ -1,0 +1,43 @@
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 60px;
+  background: #fff;
+  border-bottom: 1px solid #e6e6f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  z-index: 10;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 18px;
+  color: #4338ca;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+nav a {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4b5065;
+}
+
+nav a.active {
+  color: #4338ca;
+}
+
+.user-email {
+  font-size: 13px;
+  color: #8a8fa3;
+}
+
+main.with-header {
+  padding-top: 60px;
+}

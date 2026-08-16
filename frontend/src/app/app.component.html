@@ -1,0 +1,13 @@
+<header class="topbar" *ngIf="auth.isLoggedIn()">
+  <a routerLink="/dashboard" class="brand">ResumeForge</a>
+  <nav>
+    <a routerLink="/dashboard" routerLinkActive="active">My Resumes</a>
+    <a routerLink="/templates" routerLinkActive="active">Templates</a>
+    <span class="user-email">{{ auth.currentUser()?.email }}</span>
+    <button class="btn btn-secondary" (click)="logout()">Logout</button>
+  </nav>
+</header>
+
+<main [class.with-header]="auth.isLoggedIn()">
+  <router-outlet></router-outlet>
+</main>
