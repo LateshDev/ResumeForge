@@ -1,0 +1,41 @@
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-card h1 {
+  margin: 0 0 4px;
+  font-size: 24px;
+}
+
+.subtitle {
+  color: #8a8fa3;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.full-width {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+}
+
+.switch-link {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 20px;
+  color: #4b5065;
+}
+
+.switch-link a {
+  color: #4338ca;
+  font-weight: 600;
+}
