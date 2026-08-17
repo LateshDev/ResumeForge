@@ -35,11 +35,6 @@ Users can sign up, log in, choose a resume template, fill in their details, and 
 - JWT-based authentication (bcrypt password hashing)
 - MySQL with a JSON column for flexible resume content
 
-**Deployment**
-- Frontend & Backend: [Render](https://render.com) (Static Site + Web Service)
-- Database: [Aiven](https://aiven.io) (managed MySQL, SSL-enforced)
-- Source control: GitHub
-
 ---
 
 ## 📁 Project Structure
