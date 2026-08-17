@@ -24,7 +24,7 @@ const PORT = process.env.PORT || 5000;
 
 runMigrations()
   .then(() => {
-    app.listen(PORT, () => console.log(ResumeForge API running on http://localhost:${PORT}));
+    app.listen(PORT, () => console.log(`ResumeForge API running on http://localhost:${PORT}`));
   })
   .catch((err) => {
     console.error('Could not start server because migrations failed:', err);
