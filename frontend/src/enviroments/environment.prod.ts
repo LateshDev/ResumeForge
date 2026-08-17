@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://your-deployed-api.example.com/api'
+  apiUrl: 'https://resumeforge-e3ot.onrender.com/api'
 };
